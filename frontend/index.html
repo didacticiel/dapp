@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion des Titres Fonciers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.2.0/ethers.umd.min.js" type="application/javascript"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-8">
+
+  <div class="max-w-6xl mx-auto space-y-10">
+
+    <!-- Header -->
+    <div class="text-center">
+      <h1 class="text-3xl font-extrabold text-indigo-700">📜 Gestion des Titres Fonciers</h1>
+        <button id="connectorBtn" type="button" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow hover:bg-indigo-700 transition">
+        Se  connecter  à metamask
+        </button>
+      <p class="text-gray-600 mt-2">Ajoutez et consultez facilement les titres fonciers</p>
+    </div>
+
+    <!-- Bloc Ajout -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">➕ Ajouter un Titre Foncier</h2>
+      <form id="saveTitreFoncier" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">NPI</label>
+          <input id="npi" type="number" class="w-full mt-2 px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="Ex: 12345">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">IFU</label>
+          <input id="ifu" type="number" class="w-full mt-2 px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="Ex: 56789">
+        </div>
+        
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700">Nom complet</label>
+          <input id="fullname" type="text" class="w-full mt-2 px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="Nom et prénom">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input id="email" type="email" class="w-full mt-2 px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="exemple@mail.com">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Localisation</label>
+          <input id="location" type="text" class="w-full mt-2 px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="Ville / Quartier">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">ID Domaine</label>
+          <input id="idDomain" type="number" class="w-full mt-2 px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="Ex: 22">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Numéro Topographique</label>
+          <input id="topoNo" type="number" class="w-full mt-2 px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none" placeholder="Ex: 334">
+        </div>
+
+        <div class="md:col-span-2 text-right">
+          <button type="submit" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow hover:bg-indigo-700 transition">
+            Enregistrer
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Bloc Liste -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+            📋 Liste des Titres Fonciers (<span id="#totalTitreFoncier">0</span>)
+        </h2>
+      <div class="overflow-x-auto rounded-xl border border-gray-200">
+        <table class="min-w-full text-sm text-gray-700">
+          <thead class="bg-indigo-600 text-white text-left">
+            <tr>
+              <th class="px-6 py-3">NPI</th>
+              <th class="px-6 py-3">IFU</th>
+              <th class="px-6 py-3">Nom complet</th>
+              <th class="px-6 py-3">Email</th>
+              <th class="px-6 py-3">Localisation</th>
+              <th class="px-6 py-3">ID Domaine</th>
+              <th class="px-6 py-3">Topo No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="odd:bg-white even:bg-gray-50 hover:bg-indigo-50 transition">
+              <td class="px-6 py-4">12345</td>
+              <td class="px-6 py-4">56789</td>
+              <td class="px-6 py-4">Jean Dupont</td>
+              <td class="px-6 py-4">jean@mail.com</td>
+              <td class="px-6 py-4">Cotonou</td>
+              <td class="px-6 py-4">22</td>
+              <td class="px-6 py-4">334</td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50 hover:bg-indigo-50 transition">
+              <td class="px-6 py-4">67890</td>
+              <td class="px-6 py-4">11223</td>
+              <td class="px-6 py-4">Aminata Sow</td>
+              <td class="px-6 py-4">amina@mail.com</td>
+              <td class="px-6 py-4">Porto-Novo</td>
+              <td class="px-6 py-4">18</td>
+              <td class="px-6 py-4">450</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
